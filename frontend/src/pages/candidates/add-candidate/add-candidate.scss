@@ -1,0 +1,12 @@
+@import "../../../mixin";
+
+.add-candidate {
+  @include d-flex(column, flex-start, center);
+  gap: 1rem;
+  width: 500px;
+  max-width: 100%;
+
+  * {
+    color: var(--text-color1);
+  }
+}

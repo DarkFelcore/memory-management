@@ -24,7 +24,7 @@ namespace backend.Controllers
         [Route("Read")]
         public async Task<ActionResult<IEnumerable<CompanyReadDto>>> ReadCompanies()
         {
-            var convertedCompanies = _mapper.Map<IEnumerable<CompanyReadDto>>(await _context.Companies.ToListAsync());
+            var convertedCompanies = _mapper.Map<IEnumerable<CompanyReadDto>>(await _context.Companies.OrderByDescending(x => x.CreatedAt).ToListAsync());
             if(convertedCompanies == null)
             {
                 return NotFound("Could not retreive any company");

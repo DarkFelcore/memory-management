@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using backend.Core.Context;
-using backend.Core.Dtos.Company;
 using backend.Core.Dtos.Job;
 using backend.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +22,7 @@ namespace backend.Controllers
         [Route("Read")]
         public async Task<ActionResult<IEnumerable<JobReadDto>>> GetJobsAsync()
         {
-            var convertedJobs = _mapper.Map<IEnumerable<JobReadDto>>(await _context.Jobs.Include(job => job.Company).ToListAsync());
+            var convertedJobs = _mapper.Map<IEnumerable<JobReadDto>>(await _context.Jobs.Include(job => job.Company).OrderByDescending(x => x.CreatedAt).ToListAsync());
             if (convertedJobs == null)
             {
                 return NotFound("No jobs could be retreived");
